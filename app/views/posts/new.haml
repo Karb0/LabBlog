@@ -1,4 +1,7 @@
 %h2 New Post
+- if notice
+  %i.warning.icon
+  = notice
 = form_for(@post) do |f|
   .field
     = f.label :title
@@ -7,5 +10,5 @@
   .field
     = f.label :message
     %br/
-    = f.text_field :message
+    = f.text_area :message, size: "30x10"
   = f.submit "Post"
