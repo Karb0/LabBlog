@@ -1,11 +1,11 @@
-.posts_list
-  - if @posts.any?
-    - @posts.each do |post|
-      = link_to post_path(post.id) do
-        .ui.grid
-          .four.column.row
-            .two.wide.column.middle.aligned
-              %i.mail.square.large.icon
-            .three.wide.column.middle.aligned= post.title
-            .eight.wide.column.middle.aligned= truncate(post.message, length: 45)
-            .three.wide.column.middle.aligned= post.created_at.strftime("Posted on %d/%m/%Y")
+%h1 Posts list
+- if @posts.any?
+  - @posts.each do |post|
+    = link_to post_path(post.id) do
+      .ui.grid
+        .four.column.row
+          .two.wide.column.middle.aligned
+            %i.mail.square.large.icon
+          .three.wide.column.middle.aligned= post.title
+          .eight.wide.column.middle.aligned= truncate(post.message, length: 45)
+          .three.wide.column.middle.aligned= post.created_at.strftime("Posted on %d/%m/%Y")
