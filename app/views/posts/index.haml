@@ -1,1 +1,4 @@
-RIEN
+- if @posts.any?
+  - @posts.each do |post|
+    %a
+      = link_to post.title, post_path(post.id)
