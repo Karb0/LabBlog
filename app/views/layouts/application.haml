@@ -6,4 +6,9 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
+    - if user_signed_in?
+      %a
+        = link_to "Disconnect", destroy_user_session_path, method: :delete
+      %a
+        = link_to "New Post", posts_new_path
     = yield
