@@ -1,2 +1,3 @@
 %h1= @post.title
 %p= @post.message
+%p= "#{@post.user.name}, #{@post.created_at.strftime("%d/%m/%Y")}"
