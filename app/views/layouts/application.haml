@@ -5,11 +5,23 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  %body.ui.main.text.container
+  %body
     - if user_signed_in?
-      = link_to "Disconnect", destroy_user_session_path, method: :delete
-      = link_to "New Post", posts_new_path
-    - if request.env['PATH_INFO'] != "/" && user_signed_in?
-      = link_to "Back", root_path
+      .ui.fixed.inverted.menu
+        .ui.container
+          = link_to posts_new_path do
+            .header.item
+              %i.edit.icon.large
+          - if request.env['PATH_INFO'] != "/" && user_signed_in?
+            = link_to root_path do
+              .item
+                %i.step.backward.icon.large
+        - if user_signed_in?
+          = link_to destroy_user_session_path, method: :delete do
+            .item
+              %i.sign.out.icon.large
 
-    = yield
+
+
+    .ui.main.text.container.content
+      = yield
