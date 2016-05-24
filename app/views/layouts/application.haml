@@ -5,10 +5,11 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  %body
+  %body.ui.main.text.container
     - if user_signed_in?
-      %a
-        = link_to "Disconnect", destroy_user_session_path, method: :delete
-      %a
-        = link_to "New Post", posts_new_path
+      = link_to "Disconnect", destroy_user_session_path, method: :delete
+      = link_to "New Post", posts_new_path
+    - if request.env['PATH_INFO'] != "/" && user_signed_in?
+      = link_to "Back", root_path
+
     = yield
