@@ -6,20 +6,23 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    - if user_signed_in?
-      .ui.fixed.inverted.menu
-        .ui.container
-          = link_to posts_new_path do
-            .header.item
-              %i.edit.icon.large
-          - if request.env['PATH_INFO'] != "/" && user_signed_in?
-            = link_to root_path do
-              .item
-                %i.step.backward.icon.large
-        - if user_signed_in?
-          = link_to destroy_user_session_path, method: :delete do
+    .ui.fixed.inverted.menu
+      .ui.container
+        = link_to posts_new_path do
+          .header.item
+            %i.edit.icon.large
+        - if request.env['PATH_INFO'] != "/"
+          = link_to root_path do
             .item
-              %i.sign.out.icon.large
+              %i.step.backward.icon.large
+      - if user_signed_in?
+        = link_to destroy_user_session_path, method: :delete do
+          .item
+            %i.sign.out.icon.large
+      - else
+        = link_to new_user_session_path do
+          .item
+            %i.sign.in.icon.large
 
 
 
