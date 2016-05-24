@@ -11,10 +11,12 @@
         = link_to posts_new_path do
           .header.item
             %i.edit.icon.large
+        / doesn't display back button on root page
         - if request.env['PATH_INFO'] != "/"
           = link_to root_path do
             .item
               %i.step.backward.icon.large
+        / display sign in or sign out button in navbar
       - if user_signed_in?
         = link_to destroy_user_session_path, method: :delete do
           .item
