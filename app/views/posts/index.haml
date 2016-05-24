@@ -1,11 +1,24 @@
 %h1 Posts list
+.ui.grid
+  .four.column.row
+    .one.wide.column.middle.aligned
+    .four.wide.column.middle.aligned Title
+    .six.wide.column.middle.aligned Message
+    .two.wide.column.middle.aligned Date
+    .two.wide.column.middle.aligned Author
 - if @posts.any?
   - @posts.each do |post|
-    = link_to post_path(post.id) do
-      .ui.grid
-        .four.column.row
-          .two.wide.column.middle.aligned
-            %i.mail.square.large.icon
-          .three.wide.column.middle.aligned= post.title
-          .eight.wide.column.middle.aligned= truncate(post.message, length: 45)
-          .three.wide.column.middle.aligned= post.created_at.strftime("Posted on %d/%m/%Y")
+    .ui.grid
+      .four.column.row
+        .one.wide.column.middle.aligned
+          %i.mail.square.large.icon
+        .four.wide.column.middle.aligned= post.title
+        .six.wide.column.middle.aligned
+          = link_to post_path(post.id) do
+            = truncate(post.message, length: 35)
+        .two.wide.column.middle.aligned= post.created_at.strftime("%d/%m/%Y")
+        .two.wide.column.middle.aligned= post.user.name
+        .one.wide.column.middle.aligned
+          - if post.user == current_user
+            = link_to delete_post_path(post.id), method: :delete do
+              %i.trash.icon
