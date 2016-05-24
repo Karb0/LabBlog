@@ -1,0 +1,11 @@
+%h2 New Post
+= form_for(@post) do |f|
+  .field
+    = f.label :title
+    %br/
+    = f.text_field :title
+  .field
+    = f.label :message
+    %br/
+    = f.text_field :message
+  = f.submit "Post"
