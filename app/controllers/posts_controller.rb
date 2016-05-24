@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
     if @post.save
       redirect_to root_path
     else
@@ -19,6 +19,16 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+  end
+
+  def destroy
+    post = Post.find(params[:id])
+    if post.user == current_user
+      post.delete
+      redirect_to root_path
+    else
+      render :index
+    end
   end
 
   private
